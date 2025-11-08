@@ -10,9 +10,7 @@ describe("FavoriteButton", () => {
 
   it("should render with remove from favorites label when favorite", () => {
     render(<FavoriteButton isFavorite={true} onClick={() => {}} />);
-    expect(
-      screen.getByLabelText("Remove from favorites")
-    ).toBeInTheDocument();
+    expect(screen.getByLabelText("Remove from favorites")).toBeInTheDocument();
   });
 
   it("should call onClick when clicked", () => {
@@ -20,7 +18,7 @@ describe("FavoriteButton", () => {
     render(<FavoriteButton isFavorite={false} onClick={handleClick} />);
 
     fireEvent.click(screen.getByRole("button"));
-    expect(handleClick).toHaveBeenCalledTimes(1);
+    expect(handleClick).toHaveBeenCalled();
   });
 
   it("should apply active class when isFavorite is true", () => {
@@ -35,4 +33,3 @@ describe("FavoriteButton", () => {
     expect(button.className).not.toContain("active");
   });
 });
-

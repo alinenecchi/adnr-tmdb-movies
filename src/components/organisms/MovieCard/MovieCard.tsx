@@ -1,0 +1,57 @@
+import { Image } from "@/components/atoms/Image/Image";
+import { MovieRating } from "@/components/molecules/MovieRating/MovieRating";
+import { FavoriteButton } from "@/components/molecules/FavoriteButton/FavoriteButton";
+import { getImageUrl } from "@/services/api/endpoints";
+import type { Movie } from "@/@types";
+import styles from "./MovieCard.module.css";
+
+interface MovieCardProps {
+  movie: Movie;
+  isFavorite: boolean;
+  onToggleFavorite: (id: number) => void;
+  onClick?: () => void;
+}
+
+export const MovieCard: React.FC<MovieCardProps> = ({
+  movie,
+  isFavorite,
+  onToggleFavorite,
+  onClick,
+}) => {
+  const imageUrl = getImageUrl(movie.poster_path, "w300");
+  const year = movie.release_date
+    ? new Date(movie.release_date).getFullYear()
+    : "N/A";
+
+  const handleFavoriteClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    onToggleFavorite(movie.id);
+  };
+
+  return (
+    <article className={styles.card} onClick={onClick}>
+      <div className={styles.imageContainer}>
+        <Image
+          src={imageUrl}
+          alt={movie.title}
+          className={styles.poster}
+          loading="lazy"
+        />
+        <div className={styles.favoriteButton}>
+          <FavoriteButton
+            isFavorite={isFavorite}
+            onClick={handleFavoriteClick}
+          />
+        </div>
+      </div>
+
+      <div className={styles.content}>
+        <h3 className={styles.title}>{movie.title}</h3>
+        <div className={styles.info}>
+          <MovieRating rating={movie.vote_average} size="small" />
+          <span className={styles.year}>{year}</span>
+        </div>
+      </div>
+    </article>
+  );
+};

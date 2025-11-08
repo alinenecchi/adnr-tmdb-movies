@@ -3,7 +3,7 @@ import styles from "./FavoriteButton.module.css";
 
 interface FavoriteButtonProps {
   isFavorite: boolean;
-  onClick: () => void;
+  onClick: (e: React.MouseEvent) => void;
   className?: string;
 }
 
@@ -23,4 +23,3 @@ export const FavoriteButton: React.FC<FavoriteButtonProps> = ({
     </button>
   );
 };
-

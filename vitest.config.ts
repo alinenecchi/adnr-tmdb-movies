@@ -25,7 +25,8 @@ export default defineConfig({
         "src/main.tsx",
         "src/App.tsx",
         "src/utils/**",
-        "src/pages/ComponentsShowcase.tsx", // Demo page
+        "src/pages/Showcase/**", // Demo page
+        "src/services/api/tmdb.ts", // Axios configuration (interceptors)
       ],
       thresholds: {
         lines: 80,
