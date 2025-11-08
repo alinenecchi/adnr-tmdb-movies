@@ -1,0 +1,40 @@
+/* SearchBar Component Styles */
+
+.searchBar {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 50rem;
+}
+
+.icon {
+  position: absolute;
+  left: var(--spacing-md);
+  color: var(--color-text-secondary);
+  pointer-events: none;
+}
+
+.input {
+  padding-left: var(--spacing-5xl);
+  padding-right: var(--spacing-5xl);
+}
+
+.clearButton {
+  position: absolute;
+  right: var(--spacing-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-xs);
+  background: transparent;
+  border: none;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.clearButton:hover {
+  color: var(--color-text);
+}
+

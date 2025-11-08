@@ -1,0 +1,29 @@
+/* FavoriteButton Component Styles */
+
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-sm);
+  background-color: rgba(0, 0, 0, 0.6);
+  border: none;
+  border-radius: 50%;
+  color: var(--color-white);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  backdrop-filter: blur(4px);
+}
+
+.button:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+  transform: scale(1.1);
+}
+
+.button.active {
+  color: var(--color-accent);
+}
+
+.button.active:hover {
+  color: var(--color-accent-light);
+}
+

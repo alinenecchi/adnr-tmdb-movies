@@ -1,0 +1,26 @@
+/* MovieRating Component Styles */
+
+.rating {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+}
+
+.icon {
+  color: var(--color-secondary);
+}
+
+.value {
+  font-size: var(--text-size-base);
+  font-weight: var(--text-weight-medium);
+  color: var(--color-text);
+}
+
+.small .value {
+  font-size: var(--text-size-sm);
+}
+
+.large .value {
+  font-size: var(--text-size-lg);
+}
+

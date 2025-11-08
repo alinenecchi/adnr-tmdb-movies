@@ -11,7 +11,10 @@ export default defineConfig({
     css: true,
     coverage: {
       provider: "v8",
-      reporter: ["text", "json", "html"],
+      reporter: ["text", "json", "html", "lcov", "json-summary"],
+      reportOnFailure: true,
+      all: true,
+      include: ["src/**/*.{ts,tsx}"],
       exclude: [
         "node_modules/",
         "src/test/",
@@ -21,8 +24,21 @@ export default defineConfig({
         "**/*.config.ts",
         "src/main.tsx",
         "src/App.tsx",
-        "src/utils/**", // Exclude all utils (only constants for now)
+        "src/utils/**",
+        "src/pages/ComponentsShowcase.tsx", // Demo page
       ],
+      thresholds: {
+        lines: 80,
+        functions: 80,
+        branches: 80,
+        statements: 80,
+      },
+      watermarks: {
+        statements: [80, 95],
+        functions: [80, 95],
+        branches: [80, 95],
+        lines: [80, 95],
+      },
     },
   },
   resolve: {
