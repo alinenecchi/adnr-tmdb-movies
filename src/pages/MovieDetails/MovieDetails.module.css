@@ -1,0 +1,128 @@
+/* MovieDetails Page Styles */
+
+.container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.main {
+  flex: 1;
+  padding: var(--spacing-xl) var(--grid-padding);
+}
+
+@media (min-width: 1080px) {
+  .main {
+    padding-left: var(--grid-padding-desktop);
+    padding-right: var(--grid-padding-desktop);
+  }
+}
+
+.backButton {
+  margin-bottom: var(--spacing-lg);
+}
+
+.content {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-2xl);
+  max-width: var(--grid-width-desktop);
+  margin: 0 auto;
+}
+
+@media (min-width: 1080px) {
+  .content {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.imageSection {
+  width: 100%;
+}
+
+.backdrop {
+  width: 100%;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.infoSection {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+}
+
+.title {
+  font-size: var(--text-size-4xl);
+  color: var(--color-text);
+  margin: 0;
+  line-height: var(--text-line-height-tight);
+}
+
+.tagline {
+  font-size: var(--text-size-lg);
+  color: var(--color-text-secondary);
+  font-style: italic;
+  margin: 0;
+}
+
+.meta {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-lg);
+  flex-wrap: wrap;
+}
+
+.year,
+.voteCount {
+  font-size: var(--text-size-md);
+  color: var(--color-text-secondary);
+}
+
+.genres {
+  display: flex;
+  gap: var(--spacing-sm);
+  flex-wrap: wrap;
+}
+
+.genre {
+  padding: var(--spacing-xs) var(--spacing-md);
+  background-color: var(--color-surface-light);
+  color: var(--color-text);
+  border-radius: var(--radius-full);
+  font-size: var(--text-size-sm);
+  font-weight: var(--text-weight-medium);
+}
+
+.overview h2 {
+  font-size: var(--text-size-2xl);
+  color: var(--color-text);
+  margin-bottom: var(--spacing-md);
+}
+
+.overview p {
+  font-size: var(--text-size-md);
+  color: var(--color-text-secondary);
+  line-height: var(--text-line-height-relaxed);
+}
+
+.actions {
+  margin-top: var(--spacing-lg);
+}
+
+.error {
+  text-align: center;
+  padding: var(--spacing-5xl);
+}
+
+.error h2 {
+  font-size: var(--text-size-2xl);
+  color: var(--color-danger);
+  margin-bottom: var(--spacing-md);
+}
+
+.error p {
+  font-size: var(--text-size-md);
+  color: var(--color-text-secondary);
+  margin-bottom: var(--spacing-xl);
+}
