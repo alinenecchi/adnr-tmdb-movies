@@ -3,6 +3,7 @@ import {
   useContext,
   useReducer,
   useEffect,
+  useState,
   type ReactNode,
 } from "react";
 import { saveFavorites, loadFavorites } from "@/services/storage/localStorage";
@@ -65,19 +66,21 @@ const FavoritesContext = createContext<FavoritesContextType | undefined>(
 // Provider
 export const FavoritesProvider = ({ children }: { children: ReactNode }) => {
   const [state, dispatch] = useReducer(favoritesReducer, { favorites: [] });
+  const [isInitialized, setIsInitialized] = useState(false);
 
   // Load favorites from localStorage on mount
   useEffect(() => {
     const stored = loadFavorites();
     dispatch({ type: "LOAD_FAVORITES", payload: stored });
+    setIsInitialized(true);
   }, []);
 
-  // Save to localStorage whenever favorites change
+  // Save to localStorage whenever favorites change (but not on initial load)
   useEffect(() => {
-    if (state.favorites.length > 0 || state.favorites.length === 0) {
+    if (isInitialized) {
       saveFavorites(state.favorites);
     }
-  }, [state.favorites]);
+  }, [state.favorites, isInitialized]);
 
   const addFavorite = (id: number) => {
     dispatch({ type: "ADD_FAVORITE", payload: id });

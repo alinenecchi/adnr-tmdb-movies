@@ -7,6 +7,8 @@ import { EmptyState } from "@/components/organisms/EmptyState/EmptyState";
 import { Icon } from "@/components/atoms/Icon/Icon";
 import { useSearchMovies } from "@/hooks/useSearchMovies";
 import { useFavorites } from "@/contexts/FavoritesContext";
+import { getMovieUrl } from "@/utils/slugify";
+import type { Movie } from "@/@types";
 import styles from "./Search.module.css";
 
 export const Search = () => {
@@ -17,8 +19,8 @@ export const Search = () => {
     useSearchMovies(query);
   const { isFavorite, toggleFavorite } = useFavorites();
 
-  const handleMovieClick = (id: number) => {
-    navigate(`/movie/${id}`);
+  const handleMovieClick = (movie: Movie) => {
+    navigate(getMovieUrl(movie.id, movie.title));
   };
 
   useEffect(() => {
@@ -56,7 +58,8 @@ export const Search = () => {
             </h1>
             {totalResults > 0 && (
               <p className={styles.count}>
-                {totalResults} {totalResults === 1 ? "filme encontrado" : "filmes encontrados"}
+                {totalResults}{" "}
+                {totalResults === 1 ? "filme encontrado" : "filmes encontrados"}
               </p>
             )}
           </div>
@@ -88,4 +91,3 @@ export const Search = () => {
     </div>
   );
 };
-

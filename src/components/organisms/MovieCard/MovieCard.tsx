@@ -10,7 +10,7 @@ interface MovieCardProps {
   movie: Movie;
   isFavorite: boolean;
   onToggleFavorite: (id: number) => void;
-  onClick?: () => void;
+  onClick?: (movie: Movie) => void;
   searchTerm?: string;
 }
 
@@ -32,7 +32,7 @@ export const MovieCard: React.FC<MovieCardProps> = ({
   };
 
   return (
-    <article className={styles.card} onClick={onClick}>
+    <article className={styles.card} onClick={() => onClick?.(movie)}>
       <div className={styles.imageContainer}>
         <Image
           src={imageUrl}

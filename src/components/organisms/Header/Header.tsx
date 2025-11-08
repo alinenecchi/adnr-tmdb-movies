@@ -26,6 +26,14 @@ export const Header: React.FC = () => {
     }
   };
 
+  const handleSearchChange = (value: string) => {
+    setSearchQuery(value);
+    // If clearing search while on search page, navigate to home
+    if (!value.trim() && location.pathname === "/search") {
+      navigate("/");
+    }
+  };
+
   return (
     <header className={styles.header}>
       <div className={styles.container}>
@@ -37,7 +45,7 @@ export const Header: React.FC = () => {
         <div className={styles.searchContainer}>
           <SearchBar
             value={searchQuery}
-            onChange={setSearchQuery}
+            onChange={handleSearchChange}
             onSubmit={handleSearch}
           />
         </div>
@@ -63,4 +71,3 @@ export const Header: React.FC = () => {
     </header>
   );
 };
-

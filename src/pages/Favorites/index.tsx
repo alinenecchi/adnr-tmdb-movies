@@ -11,6 +11,8 @@ import {
 import { Icon } from "@/components/atoms/Icon/Icon";
 import { useFavorites } from "@/contexts/FavoritesContext";
 import { useFavoritedMovies } from "@/hooks/useFavoritedMovies";
+import { getMovieUrl } from "@/utils/slugify";
+import type { Movie } from "@/@types";
 import styles from "./Favorites.module.css";
 
 export const Favorites = () => {
@@ -36,8 +38,8 @@ export const Favorites = () => {
     }
   }, [movies, sortBy]);
 
-  const handleMovieClick = (id: number) => {
-    navigate(`/movie/${id}`);
+  const handleMovieClick = (movie: Movie) => {
+    navigate(getMovieUrl(movie.id, movie.title));
   };
 
   if (loading) {

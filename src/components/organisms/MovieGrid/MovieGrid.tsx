@@ -9,7 +9,7 @@ interface MovieGridProps {
   loading?: boolean;
   isFavorite: (id: number) => boolean;
   onToggleFavorite: (id: number) => void;
-  onMovieClick?: (id: number) => void;
+  onMovieClick?: (movie: Movie) => void;
   onLoadMore?: () => void;
   hasMore?: boolean;
   searchTerm?: string;
@@ -40,7 +40,7 @@ export const MovieGrid: React.FC<MovieGridProps> = ({
             movie={movie}
             isFavorite={isFavorite(movie.id)}
             onToggleFavorite={onToggleFavorite}
-            onClick={() => onMovieClick?.(movie.id)}
+            onClick={() => onMovieClick?.(movie)}
             searchTerm={searchTerm}
           />
         ))}

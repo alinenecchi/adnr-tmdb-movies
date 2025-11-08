@@ -4,6 +4,8 @@ import { MovieGrid } from "@/components/organisms/MovieGrid/MovieGrid";
 import { Loading } from "@/components/atoms/Loading/Loading";
 import { useMovies } from "@/hooks/useMovies";
 import { useFavorites } from "@/contexts/FavoritesContext";
+import { getMovieUrl } from "@/utils/slugify";
+import type { Movie } from "@/@types";
 import styles from "./Home.module.css";
 
 export const Home = () => {
@@ -11,8 +13,8 @@ export const Home = () => {
   const { movies, loading, error, loadMore, hasMore } = useMovies();
   const { isFavorite, toggleFavorite } = useFavorites();
 
-  const handleMovieClick = (id: number) => {
-    navigate(`/movie/${id}`);
+  const handleMovieClick = (movie: Movie) => {
+    navigate(getMovieUrl(movie.id, movie.title));
   };
 
   if (error) {

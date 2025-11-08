@@ -5,16 +5,17 @@ import { Button } from "@/components/atoms/Button/Button";
 import { Icon } from "@/components/atoms/Icon/Icon";
 import { Image } from "@/components/atoms/Image/Image";
 import { MovieRating } from "@/components/molecules/MovieRating/MovieRating";
-import { FavoriteButton } from "@/components/molecules/FavoriteButton/FavoriteButton";
 import { useMovieDetails } from "@/hooks/useMovieDetails";
 import { useFavorites } from "@/contexts/FavoritesContext";
 import { getImageUrl } from "@/services/api/endpoints";
+import { extractMovieId } from "@/utils/slugify";
 import styles from "./MovieDetails.module.css";
 
 export const MovieDetails = () => {
-  const { id } = useParams<{ id: string }>();
+  const { id: idParam } = useParams<{ id: string }>();
   const navigate = useNavigate();
-  const { movie, loading, error } = useMovieDetails(Number(id));
+  const movieId = idParam ? extractMovieId(idParam) : null;
+  const { movie, loading, error } = useMovieDetails(movieId || 0);
   const { isFavorite, toggleFavorite } = useFavorites();
 
   if (loading) {
