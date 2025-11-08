@@ -23,33 +23,21 @@ const mockMovie: Movie = {
 describe("MovieCard", () => {
   it("should render movie title", () => {
     render(
-      <MovieCard
-        movie={mockMovie}
-        isFavorite={false}
-        onToggleFavorite={() => {}}
-      />
+      <MovieCard movie={mockMovie} isFavorite={false} onToggleFavorite={() => {}} />
     );
     expect(screen.getByText("Test Movie")).toBeInTheDocument();
   });
 
   it("should render movie rating", () => {
     render(
-      <MovieCard
-        movie={mockMovie}
-        isFavorite={false}
-        onToggleFavorite={() => {}}
-      />
+      <MovieCard movie={mockMovie} isFavorite={false} onToggleFavorite={() => {}} />
     );
     expect(screen.getByText("8.5")).toBeInTheDocument();
   });
 
   it("should render release year", () => {
     render(
-      <MovieCard
-        movie={mockMovie}
-        isFavorite={false}
-        onToggleFavorite={() => {}}
-      />
+      <MovieCard movie={mockMovie} isFavorite={false} onToggleFavorite={() => {}} />
     );
     expect(screen.getByText("2024")).toBeInTheDocument();
   });
@@ -72,14 +60,11 @@ describe("MovieCard", () => {
   it("should call onToggleFavorite when favorite button is clicked", () => {
     const handleToggle = vi.fn();
     render(
-      <MovieCard
-        movie={mockMovie}
-        isFavorite={false}
-        onToggleFavorite={handleToggle}
-      />
+      <MovieCard movie={mockMovie} isFavorite={false} onToggleFavorite={handleToggle} />
     );
 
-    fireEvent.click(screen.getByLabelText("Add to favorites"));
+    const button = screen.getByLabelText("Adicionar aos favoritos");
+    fireEvent.click(button);
     expect(handleToggle).toHaveBeenCalledWith(1);
   });
 
@@ -95,7 +80,8 @@ describe("MovieCard", () => {
       />
     );
 
-    fireEvent.click(screen.getByLabelText("Add to favorites"));
+    const button = screen.getByLabelText("Adicionar aos favoritos");
+    fireEvent.click(button);
     expect(handleToggle).toHaveBeenCalled();
     expect(handleClick).not.toHaveBeenCalled();
   });
@@ -103,11 +89,7 @@ describe("MovieCard", () => {
   it("should show N/A when no release date", () => {
     const movieNoDate = { ...mockMovie, release_date: "" };
     render(
-      <MovieCard
-        movie={movieNoDate}
-        isFavorite={false}
-        onToggleFavorite={() => {}}
-      />
+      <MovieCard movie={movieNoDate} isFavorite={false} onToggleFavorite={() => {}} />
     );
     expect(screen.getByText("N/A")).toBeInTheDocument();
   });

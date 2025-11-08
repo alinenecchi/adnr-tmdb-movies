@@ -37,7 +37,7 @@ describe("ErrorBoundary", () => {
       </ErrorBoundary>
     );
 
-    expect(screen.getByText("Oops! Something went wrong")).toBeInTheDocument();
+    expect(screen.getByText("Ops! Algo deu errado")).toBeInTheDocument();
     expect(screen.getByText("Test error")).toBeInTheDocument();
   });
 
@@ -58,6 +58,6 @@ describe("ErrorBoundary", () => {
       </ErrorBoundary>
     );
 
-    expect(screen.getByText("Try Again")).toBeInTheDocument();
+    expect(screen.getByText("Tentar Novamente")).toBeInTheDocument();
   });
 });

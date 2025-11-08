@@ -45,7 +45,7 @@ export const MovieGrid: React.FC<MovieGridProps> = ({
 
       {hasMore && (
         <div ref={loadMoreRef} className={styles.loadMore}>
-          {loading && <Loading text="Loading more movies..." />}
+          {loading && <Loading text="Carregando mais filmes..." />}
         </div>
       )}
     </div>

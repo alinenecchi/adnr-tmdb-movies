@@ -27,7 +27,7 @@ describe("Home Page", () => {
     );
 
     renderWithProviders(<Home />);
-
+    
     expect(screen.getByRole("status")).toBeInTheDocument();
   });
 
@@ -52,9 +52,7 @@ describe("Home Page", () => {
     renderWithProviders(<Home />);
 
     await waitFor(() => {
-      expect(
-        screen.getByText("Oops! Something went wrong")
-      ).toBeInTheDocument();
+      expect(screen.getByText("Ops! Algo deu errado")).toBeInTheDocument();
       expect(screen.getByText("Failed to fetch")).toBeInTheDocument();
     });
   });
@@ -67,7 +65,7 @@ describe("Home Page", () => {
     renderWithProviders(<Home />);
 
     await waitFor(() => {
-      expect(screen.getByText("Popular Movies")).toBeInTheDocument();
+      expect(screen.getByText("Filmes Populares")).toBeInTheDocument();
     });
   });
 });

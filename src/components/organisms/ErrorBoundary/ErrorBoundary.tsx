@@ -42,12 +42,12 @@ export class ErrorBoundary extends Component<
       return (
         <div className={styles.container}>
           <div className={styles.content}>
-            <h1 className={styles.title}>Oops! Something went wrong</h1>
+            <h1 className={styles.title}>Ops! Algo deu errado</h1>
             <p className={styles.message}>
               {this.state.error?.message ||
-                "An unexpected error occurred. Please try again."}
+                "Ocorreu um erro inesperado. Tente novamente."}
             </p>
-            <Button onClick={this.handleReset}>Try Again</Button>
+            <Button onClick={this.handleReset}>Tentar Novamente</Button>
           </div>
         </div>
       );

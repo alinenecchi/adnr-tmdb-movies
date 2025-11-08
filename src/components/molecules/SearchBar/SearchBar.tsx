@@ -14,7 +14,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
   value,
   onChange,
   onSubmit,
-  placeholder = "Search movies...",
+  placeholder = "Buscar filmes...",
 }) => {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();

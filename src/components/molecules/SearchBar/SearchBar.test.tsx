@@ -5,14 +5,14 @@ import { SearchBar } from "./SearchBar";
 describe("SearchBar", () => {
   it("should render with placeholder", () => {
     render(<SearchBar value="" onChange={() => {}} />);
-    expect(screen.getByPlaceholderText("Search movies...")).toBeInTheDocument();
+    expect(screen.getByPlaceholderText("Buscar filmes...")).toBeInTheDocument();
   });
 
   it("should call onChange when typing", () => {
     const handleChange = vi.fn();
     render(<SearchBar value="" onChange={handleChange} />);
 
-    const input = screen.getByPlaceholderText("Search movies...");
+    const input = screen.getByPlaceholderText("Buscar filmes...");
     fireEvent.change(input, { target: { value: "test" } });
 
     expect(handleChange).toHaveBeenCalledWith("test");

@@ -5,12 +5,14 @@ import { FavoriteButton } from "./FavoriteButton";
 describe("FavoriteButton", () => {
   it("should render with add to favorites label when not favorite", () => {
     render(<FavoriteButton isFavorite={false} onClick={() => {}} />);
-    expect(screen.getByLabelText("Add to favorites")).toBeInTheDocument();
+    expect(screen.getByLabelText("Adicionar aos favoritos")).toBeInTheDocument();
   });
 
   it("should render with remove from favorites label when favorite", () => {
     render(<FavoriteButton isFavorite={true} onClick={() => {}} />);
-    expect(screen.getByLabelText("Remove from favorites")).toBeInTheDocument();
+    expect(
+      screen.getByLabelText("Remover dos favoritos")
+    ).toBeInTheDocument();
   });
 
   it("should call onClick when clicked", () => {

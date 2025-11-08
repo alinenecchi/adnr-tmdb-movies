@@ -21,7 +21,7 @@ export const Home = () => {
         <Header />
         <main className={styles.main}>
           <div className={styles.error}>
-            <h2>Oops! Something went wrong</h2>
+            <h2>Ops! Algo deu errado</h2>
             <p>{error.message}</p>
           </div>
         </main>
@@ -34,10 +34,10 @@ export const Home = () => {
       <Header />
       <main className={styles.main}>
         <div className={styles.content}>
-          <h1 className={styles.title}>Popular Movies</h1>
+          <h1 className={styles.title}>Filmes Populares</h1>
 
           {loading && movies.length === 0 ? (
-            <Loading text="Loading movies..." />
+            <Loading text="Carregando filmes..." />
           ) : (
             <MovieGrid
               movies={movies}

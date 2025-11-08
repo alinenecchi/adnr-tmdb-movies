@@ -22,7 +22,7 @@ export const MovieDetails = () => {
       <div className={styles.container}>
         <Header />
         <main className={styles.main}>
-          <Loading text="Loading movie details..." />
+          <Loading text="Carregando detalhes..." />
         </main>
       </div>
     );
@@ -34,9 +34,9 @@ export const MovieDetails = () => {
         <Header />
         <main className={styles.main}>
           <div className={styles.error}>
-            <h2>Movie not found</h2>
-            <p>{error?.message || "Unable to load movie details"}</p>
-            <Button onClick={() => navigate("/")}>Back to Home</Button>
+            <h2>Filme não encontrado</h2>
+            <p>{error?.message || "Não foi possível carregar os detalhes"}</p>
+            <Button onClick={() => navigate("/")}>Voltar ao Início</Button>
           </div>
         </main>
       </div>
@@ -58,7 +58,7 @@ export const MovieDetails = () => {
           className={styles.backButton}
         >
           <Icon name="arrow-left" size="small" />
-          Back
+          Voltar
         </Button>
 
         <div className={styles.content}>
@@ -79,7 +79,7 @@ export const MovieDetails = () => {
               <MovieRating rating={movie.vote_average} size="large" />
               <span className={styles.year}>{releaseYear}</span>
               <span className={styles.voteCount}>
-                {movie.vote_count.toLocaleString()} votes
+                {movie.vote_count.toLocaleString()} votos
               </span>
             </div>
 
@@ -94,7 +94,7 @@ export const MovieDetails = () => {
             )}
 
             <div className={styles.overview}>
-              <h2>Synopsis</h2>
+              <h2>Sinopse</h2>
               <p>{movie.overview}</p>
             </div>
 
@@ -111,8 +111,8 @@ export const MovieDetails = () => {
                   size="small"
                 />
                 {isFavorite(movie.id)
-                  ? "Remove from Favorites"
-                  : "Add to Favorites"}
+                  ? "Remover dos Favoritos"
+                  : "Adicionar aos Favoritos"}
               </Button>
             </div>
           </div>

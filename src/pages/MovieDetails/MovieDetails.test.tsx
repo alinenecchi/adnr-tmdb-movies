@@ -67,7 +67,7 @@ describe("MovieDetails Page", () => {
     renderWithProviders();
 
     await waitFor(() => {
-      expect(screen.getByText("Movie not found")).toBeInTheDocument();
+      expect(screen.getByText("Filme não encontrado")).toBeInTheDocument();
     });
   });
 });

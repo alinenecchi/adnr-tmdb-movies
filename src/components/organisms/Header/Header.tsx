@@ -25,11 +25,11 @@ export const Header: React.FC = () => {
 
         <nav className={styles.nav}>
           <Button variant="ghost" onClick={() => navigate("/")}>
-            Home
+            Início
           </Button>
           <Button variant="ghost" onClick={() => navigate("/favorites")}>
             <Icon name="heart" size="small" />
-            Favorites
+            Favoritos
           </Button>
         </nav>
 

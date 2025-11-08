@@ -29,19 +29,19 @@ describe("Header", () => {
 
   it("should render navigation buttons", () => {
     renderWithRouter(<Header />);
-    expect(screen.getByText("Home")).toBeInTheDocument();
-    expect(screen.getByText("Favorites")).toBeInTheDocument();
+    expect(screen.getByText("Início")).toBeInTheDocument();
+    expect(screen.getByText("Favoritos")).toBeInTheDocument();
   });
 
   it("should render search bar", () => {
     renderWithRouter(<Header />);
-    expect(screen.getByPlaceholderText("Search movies...")).toBeInTheDocument();
+    expect(screen.getByPlaceholderText("Buscar filmes...")).toBeInTheDocument();
   });
 
   it("should navigate to search when search is submitted", () => {
     renderWithRouter(<Header />);
     
-    const searchInput = screen.getByPlaceholderText("Search movies...");
+    const searchInput = screen.getByPlaceholderText("Buscar filmes...");
     fireEvent.change(searchInput, { target: { value: "avengers" } });
     
     const form = searchInput.closest("form");
@@ -53,7 +53,7 @@ describe("Header", () => {
   it("should not navigate when search is empty", () => {
     renderWithRouter(<Header />);
     
-    const searchInput = screen.getByPlaceholderText("Search movies...");
+    const searchInput = screen.getByPlaceholderText("Buscar filmes...");
     const form = searchInput.closest("form");
     fireEvent.submit(form!);
 
@@ -63,14 +63,14 @@ describe("Header", () => {
   it("should navigate to home when Home button is clicked", () => {
     renderWithRouter(<Header />);
     
-    fireEvent.click(screen.getByText("Home"));
+    fireEvent.click(screen.getByText("Início"));
     expect(mockNavigate).toHaveBeenCalledWith("/");
   });
 
   it("should navigate to favorites when Favorites button is clicked", () => {
     renderWithRouter(<Header />);
     
-    fireEvent.click(screen.getByText("Favorites"));
+    fireEvent.click(screen.getByText("Favoritos"));
     expect(mockNavigate).toHaveBeenCalledWith("/favorites");
   });
 });
