@@ -58,6 +58,15 @@
   background-color: var(--color-surface);
 }
 
+.ghost.active {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+}
+
+.ghost.active:hover:not(:disabled) {
+  background-color: var(--color-primary-dark);
+}
+
 /* Sizes */
 .small {
   padding: var(--spacing-xs) var(--spacing-md);

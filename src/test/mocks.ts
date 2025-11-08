@@ -21,10 +21,11 @@ export const createMockMovie = (overrides: Partial<Movie> = {}): Movie => ({
 export const createMockTMDBResponse = (
   movies: Movie[],
   page = 1,
-  totalPages = 1
+  totalPages = 1,
+  totalResults?: number
 ): TMDBResponse<Movie> => ({
   page,
   results: movies,
   total_pages: totalPages,
-  total_results: movies.length * totalPages,
+  total_results: totalResults ?? movies.length * totalPages,
 });

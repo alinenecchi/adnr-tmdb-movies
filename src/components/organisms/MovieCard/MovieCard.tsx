@@ -2,6 +2,7 @@ import { Image } from "@/components/atoms/Image/Image";
 import { MovieRating } from "@/components/molecules/MovieRating/MovieRating";
 import { FavoriteButton } from "@/components/molecules/FavoriteButton/FavoriteButton";
 import { getImageUrl } from "@/services/api/endpoints";
+import { highlightText } from "@/utils/highlightText";
 import type { Movie } from "@/@types";
 import styles from "./MovieCard.module.css";
 
@@ -10,6 +11,7 @@ interface MovieCardProps {
   isFavorite: boolean;
   onToggleFavorite: (id: number) => void;
   onClick?: () => void;
+  searchTerm?: string;
 }
 
 export const MovieCard: React.FC<MovieCardProps> = ({
@@ -17,6 +19,7 @@ export const MovieCard: React.FC<MovieCardProps> = ({
   isFavorite,
   onToggleFavorite,
   onClick,
+  searchTerm,
 }) => {
   const imageUrl = getImageUrl(movie.poster_path, "w300");
   const year = movie.release_date
@@ -46,7 +49,9 @@ export const MovieCard: React.FC<MovieCardProps> = ({
       </div>
 
       <div className={styles.content}>
-        <h3 className={styles.title}>{movie.title}</h3>
+        <h3 className={styles.title}>
+          {searchTerm ? highlightText(movie.title, searchTerm) : movie.title}
+        </h3>
         <div className={styles.info}>
           <MovieRating rating={movie.vote_average} size="small" />
           <span className={styles.year}>{year}</span>

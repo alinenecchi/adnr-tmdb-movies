@@ -88,9 +88,7 @@ export const Favorites = () => {
       <main className={styles.main}>
         <div className={styles.content}>
           <div className={styles.header}>
-            <h1 className={styles.title}>
-              Meus Favoritos ({favorites.length})
-            </h1>
+            <h1 className={styles.title}>Meus Filmes Favoritos</h1>
             <SortFilter value={sortBy} onChange={setSortBy} />
           </div>
 

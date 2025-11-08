@@ -105,6 +105,7 @@ export const MovieDetails = () => {
                   e.stopPropagation();
                   toggleFavorite(movie.id);
                 }}
+                className={isFavorite(movie.id) ? styles.favoriteButton : ""}
               >
                 <Icon
                   name={isFavorite(movie.id) ? "heart-filled" : "heart"}

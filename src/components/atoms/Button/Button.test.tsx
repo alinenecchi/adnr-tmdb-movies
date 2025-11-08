@@ -63,5 +63,17 @@ describe("Button", () => {
     const button = screen.getByText("Click me");
     expect(button).toBeDisabled();
   });
+
+  it("should apply active class when active prop is true", () => {
+    render(<Button active>Click me</Button>);
+    const button = screen.getByText("Click me");
+    expect(button.className).toContain("active");
+  });
+
+  it("should not apply active class when active prop is false", () => {
+    render(<Button active={false}>Click me</Button>);
+    const button = screen.getByText("Click me");
+    expect(button.className).not.toContain("active");
+  });
 });
 

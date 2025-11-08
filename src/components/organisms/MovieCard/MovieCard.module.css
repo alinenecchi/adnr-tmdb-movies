@@ -69,3 +69,10 @@
   font-size: var(--text-size-sm);
   color: var(--color-text-secondary);
 }
+
+.title :global(.highlight) {
+  background-color: var(--color-accent);
+  color: var(--color-text);
+  padding: 0 2px;
+  font-weight: var(--text-weight-bold);
+}

@@ -23,21 +23,33 @@ const mockMovie: Movie = {
 describe("MovieCard", () => {
   it("should render movie title", () => {
     render(
-      <MovieCard movie={mockMovie} isFavorite={false} onToggleFavorite={() => {}} />
+      <MovieCard
+        movie={mockMovie}
+        isFavorite={false}
+        onToggleFavorite={() => {}}
+      />
     );
     expect(screen.getByText("Test Movie")).toBeInTheDocument();
   });
 
   it("should render movie rating", () => {
     render(
-      <MovieCard movie={mockMovie} isFavorite={false} onToggleFavorite={() => {}} />
+      <MovieCard
+        movie={mockMovie}
+        isFavorite={false}
+        onToggleFavorite={() => {}}
+      />
     );
     expect(screen.getByText("8.5")).toBeInTheDocument();
   });
 
   it("should render release year", () => {
     render(
-      <MovieCard movie={mockMovie} isFavorite={false} onToggleFavorite={() => {}} />
+      <MovieCard
+        movie={mockMovie}
+        isFavorite={false}
+        onToggleFavorite={() => {}}
+      />
     );
     expect(screen.getByText("2024")).toBeInTheDocument();
   });
@@ -60,7 +72,11 @@ describe("MovieCard", () => {
   it("should call onToggleFavorite when favorite button is clicked", () => {
     const handleToggle = vi.fn();
     render(
-      <MovieCard movie={mockMovie} isFavorite={false} onToggleFavorite={handleToggle} />
+      <MovieCard
+        movie={mockMovie}
+        isFavorite={false}
+        onToggleFavorite={handleToggle}
+      />
     );
 
     const button = screen.getByLabelText("Adicionar aos favoritos");
@@ -89,8 +105,29 @@ describe("MovieCard", () => {
   it("should show N/A when no release date", () => {
     const movieNoDate = { ...mockMovie, release_date: "" };
     render(
-      <MovieCard movie={movieNoDate} isFavorite={false} onToggleFavorite={() => {}} />
+      <MovieCard
+        movie={movieNoDate}
+        isFavorite={false}
+        onToggleFavorite={() => {}}
+      />
     );
     expect(screen.getByText("N/A")).toBeInTheDocument();
+  });
+
+  it("should highlight search term in title", () => {
+    const { container } = render(
+      <MovieCard
+        movie={mockMovie}
+        isFavorite={false}
+        onToggleFavorite={() => {}}
+        searchTerm="Test"
+      />
+    );
+    const title = container.querySelector("h3");
+    expect(title).toBeInTheDocument();
+    expect(title?.textContent).toBe("Test Movie");
+    const highlight = title?.querySelector("mark");
+    expect(highlight).toBeInTheDocument();
+    expect(highlight?.textContent).toBe("Test");
   });
 });
