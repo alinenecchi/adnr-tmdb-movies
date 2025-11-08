@@ -9,7 +9,8 @@ export type IconName =
   | "film"
   | "close"
   | "arrow-left"
-  | "arrow-right";
+  | "arrow-right"
+  | "menu";
 
 interface IconProps {
   name: IconName;
@@ -47,6 +48,9 @@ export const Icon: React.FC<IconProps> = ({
     close: <path d="M18 6L6 18M6 6l12 12" />,
     "arrow-left": <path d="M19 12H5M12 19l-7-7 7-7" />,
     "arrow-right": <path d="M5 12h14M12 5l7 7-7 7" />,
+    menu: (
+      <path d="M3 12h18M3 6h18M3 18h18" strokeLinecap="round" strokeLinejoin="round" />
+    ),
   };
 
   return (

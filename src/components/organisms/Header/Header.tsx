@@ -7,6 +7,7 @@ import styles from "./Header.module.css";
 
 export const Header: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState("");
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -18,6 +19,8 @@ export const Header: React.FC = () => {
     } else {
       setSearchQuery("");
     }
+    // Close mobile menu when route changes
+    setIsMobileMenuOpen(false);
   }, [location]);
 
   const handleSearch = () => {
@@ -32,6 +35,15 @@ export const Header: React.FC = () => {
     if (!value.trim() && location.pathname === "/search") {
       navigate("/");
     }
+  };
+
+  const handleNavClick = (path: string) => {
+    navigate(path);
+    setIsMobileMenuOpen(false);
+  };
+
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
   return (
@@ -67,7 +79,38 @@ export const Header: React.FC = () => {
             Favoritos
           </Button>
         </nav>
+
+        <button
+          className={styles.mobileMenuButton}
+          onClick={toggleMobileMenu}
+          aria-label="Menu"
+          aria-expanded={isMobileMenuOpen}
+        >
+          <Icon name={isMobileMenuOpen ? "close" : "menu"} size="medium" />
+        </button>
       </div>
+
+      {isMobileMenuOpen && (
+        <div className={styles.mobileMenu}>
+          <Button
+            variant="ghost"
+            active={location.pathname === "/"}
+            onClick={() => handleNavClick("/")}
+            className={styles.mobileNavButton}
+          >
+            Início
+          </Button>
+          <Button
+            variant="ghost"
+            active={location.pathname === "/favorites"}
+            onClick={() => handleNavClick("/favorites")}
+            className={styles.mobileNavButton}
+          >
+            <Icon name="heart" size="small" />
+            Favoritos
+          </Button>
+        </div>
+      )}
     </header>
   );
 };

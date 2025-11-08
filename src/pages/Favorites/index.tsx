@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Header } from "@/components/organisms/Header/Header";
 import { MovieGrid } from "@/components/organisms/MovieGrid/MovieGrid";
@@ -8,10 +8,12 @@ import {
   SortFilter,
   type SortOption,
 } from "@/components/molecules/SortFilter/SortFilter";
+import { Pagination } from "@/components/molecules/Pagination/Pagination";
 import { Icon } from "@/components/atoms/Icon/Icon";
 import { useFavorites } from "@/contexts/FavoritesContext";
 import { useFavoritedMovies } from "@/hooks/useFavoritedMovies";
 import { getMovieUrl } from "@/utils/slugify";
+import { PAGINATION } from "@/utils/constants";
 import type { Movie } from "@/@types";
 import styles from "./Favorites.module.css";
 
@@ -20,6 +22,7 @@ export const Favorites = () => {
   const { favorites, toggleFavorite, isFavorite } = useFavorites();
   const { movies, loading, error } = useFavoritedMovies(favorites);
   const [sortBy, setSortBy] = useState<SortOption>("title-asc");
+  const [currentPage, setCurrentPage] = useState(1);
 
   const sortedMovies = useMemo(() => {
     const sorted = [...movies];
@@ -37,6 +40,26 @@ export const Favorites = () => {
         return sorted;
     }
   }, [movies, sortBy]);
+
+  const totalPages = Math.ceil(sortedMovies.length / PAGINATION.ITEMS_PER_PAGE);
+
+  // Reset to page 1 when sorting changes
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [sortBy]);
+
+  // Reset to page 1 if current page is out of bounds
+  useEffect(() => {
+    if (currentPage > totalPages && totalPages > 0) {
+      setCurrentPage(1);
+    }
+  }, [currentPage, totalPages]);
+
+  const paginatedMovies = useMemo(() => {
+    const startIndex = (currentPage - 1) * PAGINATION.ITEMS_PER_PAGE;
+    const endIndex = startIndex + PAGINATION.ITEMS_PER_PAGE;
+    return sortedMovies.slice(startIndex, endIndex);
+  }, [sortedMovies, currentPage]);
 
   const handleMovieClick = (movie: Movie) => {
     navigate(getMovieUrl(movie.id, movie.title));
@@ -95,11 +118,21 @@ export const Favorites = () => {
           </div>
 
           <MovieGrid
-            movies={sortedMovies}
+            movies={paginatedMovies}
             isFavorite={isFavorite}
             onToggleFavorite={toggleFavorite}
             onMovieClick={handleMovieClick}
           />
+
+          {totalPages > 1 && (
+            <Pagination
+              currentPage={currentPage}
+              totalPages={totalPages}
+              onPageChange={setCurrentPage}
+              itemsPerPage={PAGINATION.ITEMS_PER_PAGE}
+              totalItems={sortedMovies.length}
+            />
+          )}
         </div>
       </main>
     </div>
