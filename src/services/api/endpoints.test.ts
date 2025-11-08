@@ -1,5 +1,10 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
-import { getPopularMovies, searchMovies, getImageUrl } from "./endpoints";
+import {
+  getPopularMovies,
+  searchMovies,
+  getMovieDetails,
+  getImageUrl,
+} from "./endpoints";
 import tmdbClient from "./tmdb";
 
 // Mock the tmdb client
@@ -73,6 +78,25 @@ describe("API Endpoints", () => {
     });
   });
 
+  describe("getMovieDetails", () => {
+    it("should fetch movie details by id", async () => {
+      const mockMovie = {
+        data: {
+          id: 123,
+          title: "Test Movie",
+          overview: "Test overview",
+        },
+      };
+
+      vi.mocked(tmdbClient.get).mockResolvedValueOnce(mockMovie);
+
+      const result = await getMovieDetails(123);
+
+      expect(tmdbClient.get).toHaveBeenCalledWith("/movie/123");
+      expect(result).toEqual(mockMovie.data);
+    });
+  });
+
   describe("getImageUrl", () => {
     it("should return placeholder for null path", () => {
       const result = getImageUrl(null);
@@ -92,4 +116,3 @@ describe("API Endpoints", () => {
     });
   });
 });
-
