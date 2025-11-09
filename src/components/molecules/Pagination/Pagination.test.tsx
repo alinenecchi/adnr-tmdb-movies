@@ -15,7 +15,11 @@ describe("Pagination", () => {
       <Pagination currentPage={1} totalPages={5} onPageChange={() => {}} />
     );
 
-    expect(screen.getByText("Página 1 de 5")).toBeInTheDocument();
+    // Check for page info (text is split across spans: "Página " and "1 de 5")
+    // Find the parent element that contains both parts
+    const pageInfoContainer = screen.getByText(/1 de 5/).closest("div");
+    expect(pageInfoContainer?.textContent).toContain("Página");
+    expect(pageInfoContainer?.textContent).toContain("1 de 5");
     expect(screen.getByText("Anterior")).toBeInTheDocument();
     expect(screen.getByText("Próxima")).toBeInTheDocument();
   });
