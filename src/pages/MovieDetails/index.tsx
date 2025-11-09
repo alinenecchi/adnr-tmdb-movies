@@ -74,16 +74,6 @@ export const MovieDetails = () => {
           <div className={styles.infoSection}>
             <h1 className={styles.title}>{movie.title}</h1>
 
-            {movie.tagline && <p className={styles.tagline}>{movie.tagline}</p>}
-
-            <div className={styles.meta}>
-              <MovieRating rating={movie.vote_average} size="large" />
-              <span className={styles.year}>{releaseYear}</span>
-              <span className={styles.voteCount}>
-                {movie.vote_count.toLocaleString()} votos
-              </span>
-            </div>
-
             {movie.genres && movie.genres.length > 0 && (
               <div className={styles.genres}>
                 {movie.genres.map((genre) => (
@@ -93,6 +83,16 @@ export const MovieDetails = () => {
                 ))}
               </div>
             )}
+
+            {movie.tagline && <p className={styles.tagline}>{movie.tagline}</p>}
+
+            <div className={styles.meta}>
+              <MovieRating rating={movie.vote_average} size="large" />
+              <span className={styles.year}>{releaseYear}</span>
+              <span className={styles.voteCount}>
+                {movie.vote_count.toLocaleString()} votos
+              </span>
+            </div>
 
             <div className={styles.overview}>
               <h2>Sinopse</h2>

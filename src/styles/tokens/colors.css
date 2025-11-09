@@ -6,6 +6,9 @@
   --color-primary-light: #818cf8;
   --color-primary-dark: #4f46e5;
 
+  /* Genre Pills Color */
+  --color-genre-pill: #1b8ed8;
+
   /* Secondary Colors - Yellow/Gold for ratings */
   --color-secondary: #fbbf24; /* Gold/Yellow for badges */
   --color-secondary-light: #fcd34d;

@@ -13,6 +13,7 @@ interface MovieGridProps {
   onLoadMore?: () => void;
   hasMore?: boolean;
   searchTerm?: string;
+  showTrashIcon?: boolean;
 }
 
 export const MovieGrid: React.FC<MovieGridProps> = ({
@@ -24,6 +25,7 @@ export const MovieGrid: React.FC<MovieGridProps> = ({
   onLoadMore,
   hasMore = false,
   searchTerm,
+  showTrashIcon = false,
 }) => {
   const loadMoreRef = useInfiniteScroll({
     loading,
@@ -42,6 +44,7 @@ export const MovieGrid: React.FC<MovieGridProps> = ({
             onToggleFavorite={onToggleFavorite}
             onClick={() => onMovieClick?.(movie)}
             searchTerm={searchTerm}
+            showTrashIcon={showTrashIcon}
           />
         ))}
       </div>

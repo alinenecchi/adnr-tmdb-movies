@@ -6,6 +6,7 @@
   align-items: center;
   width: 100%;
   max-width: 50rem;
+  min-width: 0; /* Allow shrinking */
 }
 
 .icon {
@@ -13,11 +14,42 @@
   left: var(--spacing-md);
   color: var(--color-text-secondary);
   pointer-events: none;
+  z-index: 1;
 }
 
 .input {
   padding-left: var(--spacing-5xl);
   padding-right: var(--spacing-5xl);
+  min-width: 0; /* Allow shrinking */
+}
+
+/* Mobile: Ensure placeholder text is visible */
+@media (max-width: 599px) {
+  .searchBar {
+    min-width: 200px; /* Ensure minimum width for placeholder */
+  }
+
+  .input {
+    padding-left: var(--spacing-4xl);
+    padding-right: var(--spacing-4xl);
+    font-size: 16px; /* Prevent zoom on iOS */
+    min-width: 0;
+    width: 100%;
+  }
+
+  .input::placeholder {
+    white-space: nowrap;
+    overflow: visible;
+    text-overflow: clip;
+  }
+
+  .icon {
+    left: var(--spacing-sm);
+  }
+
+  .clearButton {
+    right: var(--spacing-sm);
+  }
 }
 
 .clearButton {
@@ -37,4 +69,3 @@
 .clearButton:hover {
   color: var(--color-text);
 }
-
