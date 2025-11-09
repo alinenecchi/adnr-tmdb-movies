@@ -1,0 +1,161 @@
+/* Global Styles - Component-agnostic utilities */
+
+/* Root element */
+#root {
+  width: 100%;
+  min-height: 100vh;
+  isolation: isolate;
+}
+
+/* Utility classes */
+.text-center {
+  text-align: center;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-uppercase {
+  text-transform: uppercase;
+}
+
+.text-lowercase {
+  text-transform: lowercase;
+}
+
+.text-capitalize {
+  text-transform: capitalize;
+}
+
+.font-bold {
+  font-weight: var(--text-weight-bold);
+}
+
+.font-medium {
+  font-weight: var(--text-weight-medium);
+}
+
+.font-normal {
+  font-weight: var(--text-weight-normal);
+}
+
+/* Spacing utilities */
+.m-0 {
+  margin: 0;
+}
+.mt-sm {
+  margin-top: var(--spacing-sm);
+}
+.mt-md {
+  margin-top: var(--spacing-md);
+}
+.mt-lg {
+  margin-top: var(--spacing-lg);
+}
+.mb-sm {
+  margin-bottom: var(--spacing-sm);
+}
+.mb-md {
+  margin-bottom: var(--spacing-md);
+}
+.mb-lg {
+  margin-bottom: var(--spacing-lg);
+}
+
+.p-0 {
+  padding: 0;
+}
+.p-sm {
+  padding: var(--spacing-sm);
+}
+.p-md {
+  padding: var(--spacing-md);
+}
+.p-lg {
+  padding: var(--spacing-lg);
+}
+
+/* Width utilities */
+.w-full {
+  width: 100%;
+}
+
+.h-full {
+  height: 100%;
+}
+
+/* Transitions */
+.transition-fast {
+  transition: all 0.15s ease-in-out;
+}
+
+.transition-normal {
+  transition: all 0.3s ease-in-out;
+}
+
+.transition-slow {
+  transition: all 0.5s ease-in-out;
+}
+
+/* Truncate text */
+.truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Loading state */
+[data-loading="true"] {
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+/* Disabled state */
+[disabled],
+[data-disabled="true"] {
+  pointer-events: none;
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Modal/Menu open - prevent body scroll */
+body[data-modal-open="true"],
+body[data-menu-open="true"] {
+  overflow: hidden;
+}
+
+/* Skip to content link for accessibility */
+.skip-to-content {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: var(--color-primary);
+  color: var(--color-white);
+  padding: var(--spacing-sm) var(--spacing-md);
+  z-index: 100;
+  border-radius: var(--radius-sm);
+}
+
+.skip-to-content:focus {
+  top: var(--spacing-sm);
+}
+

@@ -1,0 +1,78 @@
+/* Responsive Mixins - Mobile First Approach */
+
+/*
+ * These are utility classes that can be used in CSS Modules
+ * Import this file in your component styles when needed
+ */
+
+/* Container with responsive padding */
+.container {
+  width: 100%;
+  padding-left: var(--grid-padding);
+  padding-right: var(--grid-padding);
+}
+
+@media (min-width: 1080px) {
+  .container {
+    max-width: var(--grid-width-desktop);
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: var(--grid-padding-desktop);
+    padding-right: var(--grid-padding-desktop);
+  }
+}
+
+/* Visibility utilities */
+.hide-mobile {
+  display: none;
+}
+
+@media (min-width: 600px) {
+  .hide-mobile {
+    display: block;
+  }
+}
+
+.hide-tablet {
+  display: block;
+}
+
+@media (min-width: 600px) and (max-width: 1079px) {
+  .hide-tablet {
+    display: none;
+  }
+}
+
+.hide-desktop {
+  display: block;
+}
+
+@media (min-width: 1080px) {
+  .hide-desktop {
+    display: none;
+  }
+}
+
+.show-mobile {
+  display: block;
+}
+
+@media (min-width: 600px) {
+  .show-mobile {
+    display: none;
+  }
+}
+
+/* Screen reader only (accessible but visually hidden) */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+

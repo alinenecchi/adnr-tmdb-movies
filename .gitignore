@@ -50,5 +50,5 @@ Thumbs.db
 .DS_Store
 
 # Reference files (to be removed)
-styles/
+/styles/
 

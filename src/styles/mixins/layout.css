@@ -1,0 +1,176 @@
+/* Layout Mixins - Reusable Layout Patterns */
+
+/* Flexbox utilities */
+.flex {
+  display: flex;
+}
+
+.flex-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.flex-start {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+.flex-end {
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+}
+
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
+/* Grid utilities */
+.grid {
+  display: grid;
+}
+
+.grid-responsive {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--grid-gutter);
+}
+
+@media (min-width: 600px) {
+  .grid-responsive {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  }
+}
+
+@media (min-width: 1080px) {
+  .grid-responsive {
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  }
+}
+
+/* Grid with specific columns */
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--grid-gutter);
+}
+
+@media (min-width: 600px) {
+  .grid-2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.grid-3 {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--grid-gutter);
+}
+
+@media (min-width: 600px) {
+  .grid-3 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1080px) {
+  .grid-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.grid-4 {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--grid-gutter);
+}
+
+@media (min-width: 600px) {
+  .grid-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1080px) {
+  .grid-4 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* Centered layout */
+.layout-centered {
+  display: grid;
+  place-items: center;
+  justify-content: center;
+}
+
+/* Stack layout (header + content + footer) */
+.layout-stack {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  min-height: 100vh;
+}
+
+/* Sidebar layout */
+.layout-sidebar {
+  display: grid;
+  gap: var(--grid-gutter);
+}
+
+@media (min-width: 1080px) {
+  .layout-sidebar {
+    grid-template-columns: minmax(15rem, 25%) 1fr;
+  }
+}
+
+/* Aspect ratio boxes */
+.aspect-square {
+  aspect-ratio: 1 / 1;
+}
+
+.aspect-video {
+  aspect-ratio: 16 / 9;
+}
+
+.aspect-poster {
+  aspect-ratio: 2 / 3;
+}
+
+/* Z-index layers */
+.z-underground {
+  z-index: -1;
+}
+
+.z-ground {
+  z-index: 1;
+}
+
+.z-above {
+  z-index: 10;
+}
+
+.z-modal {
+  z-index: 100;
+}
+
+.z-overlay {
+  z-index: 1000;
+}
+
+.z-top {
+  z-index: 10000;
+}
+
