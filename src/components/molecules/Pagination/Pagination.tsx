@@ -62,8 +62,9 @@ export const Pagination: React.FC<PaginationProps> = ({
         </Button>
 
         <div className={styles.pageInfo}>
+          <span className={styles.pageLabel}>Página </span>
           <span>
-            Página {currentPage} de {totalPages}
+            {currentPage} de {totalPages}
           </span>
         </div>
 

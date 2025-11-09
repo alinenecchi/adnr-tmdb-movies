@@ -33,6 +33,19 @@
   order: 2; /* Put in the middle between buttons */
 }
 
+.pageLabel {
+  display: inline; /* Show "Página" on desktop */
+}
+
+/* Ensure buttons are in correct order on desktop */
+.controls button:first-child {
+  order: 1;
+}
+
+.controls button:last-child {
+  order: 3;
+}
+
 @media (max-width: 599px) {
   .controls {
     gap: var(--spacing-sm);
@@ -49,6 +62,10 @@
     left: 50%;
     transform: translateX(-50%);
     order: 0; /* Reset order for absolute positioning */
+  }
+
+  .pageLabel {
+    display: none; /* Hide "Página" on mobile */
   }
 
   /* Make buttons smaller but still touchable */
