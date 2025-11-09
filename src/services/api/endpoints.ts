@@ -1,5 +1,5 @@
 import tmdbClient from "./tmdb";
-import type { Movie, TMDBResponse } from "@/@types";
+import type { Movie, MovieDetails, TMDBResponse } from "@/@types";
 
 // Get popular movies
 export const getPopularMovies = async (
@@ -23,8 +23,8 @@ export const searchMovies = async (
 };
 
 // Get movie details
-export const getMovieDetails = async (id: number): Promise<Movie> => {
-  const response = await tmdbClient.get<Movie>(`/movie/${id}`);
+export const getMovieDetails = async (id: number): Promise<MovieDetails> => {
+  const response = await tmdbClient.get<MovieDetails>(`/movie/${id}`);
   return response.data;
 };
 

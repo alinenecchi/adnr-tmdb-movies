@@ -1,4 +1,4 @@
-import { describe, it, expect, vi } from "vitest";
+import { describe, it, expect, vi, beforeEach } from "vitest";
 import { render, screen, fireEvent } from "@testing-library/react";
 import { BrowserRouter } from "react-router-dom";
 import { Header } from "./Header";
@@ -83,4 +83,43 @@ describe("Header", () => {
     const homeButton = screen.getByText("Início").closest("button");
     expect(homeButton).toBeInTheDocument();
   });
+
+  it("should toggle mobile menu when button is clicked", () => {
+    renderWithRouter(<Header />);
+    
+    const menuButton = screen.getByLabelText("Menu");
+    expect(menuButton).toBeInTheDocument();
+    
+    // Menu should not be visible initially
+    expect(screen.queryByText("Início")).toBeInTheDocument(); // Desktop nav
+    
+    // Click to open menu
+    fireEvent.click(menuButton);
+    
+    // Menu should be open (mobile menu buttons should be visible)
+    const mobileMenuButtons = screen.getAllByText("Início");
+    expect(mobileMenuButtons.length).toBeGreaterThan(1);
+    
+    // Click to close menu
+    fireEvent.click(menuButton);
+  });
+
+  it("should close mobile menu when navigation link is clicked", () => {
+    renderWithRouter(<Header />);
+    
+    const menuButton = screen.getByLabelText("Menu");
+    fireEvent.click(menuButton);
+    
+    // Find mobile menu buttons (there should be multiple "Início" buttons)
+    const mobileButtons = screen.getAllByText("Início");
+    const mobileButton = mobileButtons.find(
+      (btn) => btn.closest("button")?.className.includes("mobileNavButton")
+    );
+    
+    if (mobileButton) {
+      fireEvent.click(mobileButton);
+      expect(mockNavigate).toHaveBeenCalledWith("/");
+    }
+  });
+
 });

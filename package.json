@@ -13,7 +13,7 @@
     "test": "vitest --run",
     "test:watch": "vitest",
     "test:ui": "vitest --ui",
-    "test:coverage": "vitest --coverage --run",
+    "test:coverage": "vitest --coverage --run --reporter=verbose --reporter=json --outputFile=./coverage/test-results.json || true; node scripts/show-failed-tests.cjs; node scripts/add-failed-tests-to-html.cjs",
     "type-check": "tsc --noEmit"
   },
   "dependencies": {

@@ -198,15 +198,20 @@ npm i -g vercel
 vercel --prod
 ```
 
+Or use the Vercel dashboard: Import your GitHub repository and configure environment variables.
+
 ### Deploy to Netlify
 
 ```bash
 npm i -g netlify-cli
-npm run build
-netlify deploy --prod --dir=dist
+netlify login
+netlify init
+netlify deploy --prod
 ```
 
-**Note**: Configure environment variables in your deployment platform.
+Or use the Netlify dashboard: Import your GitHub repository, set build command to `npm run build`, publish directory to `dist`, and configure environment variables.
+
+**Note**: See [DEPLOY.md](./DEPLOY.md) for detailed deployment instructions for both platforms.
 
 ## 📐 Code Standards
 

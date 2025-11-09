@@ -19,7 +19,7 @@ export const useMovieDetails = (id: number): UseMovieDetailsReturn => {
         setLoading(true);
         setError(null);
         const data = await getMovieDetails(id);
-        setMovie(data as MovieDetails);
+        setMovie(data);
       } catch (err) {
         setError(err as Error);
       } finally {

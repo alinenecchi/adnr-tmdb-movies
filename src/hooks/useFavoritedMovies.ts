@@ -20,7 +20,12 @@ export const useFavoritedMovies = (favoriteIds: number[]) => {
         setError(null);
         const promises = favoriteIds.map((id) => getMovieDetails(id));
         const results = await Promise.all(promises);
-        setMovies(results as Movie[]);
+        // Convert MovieDetails to Movie by extracting genre_ids from genres
+        const moviesData: Movie[] = results.map((movie) => ({
+          ...movie,
+          genre_ids: movie.genres.map((g) => g.id),
+        }));
+        setMovies(moviesData);
       } catch (err) {
         setError(err as Error);
       } finally {
