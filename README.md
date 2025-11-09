@@ -2,6 +2,20 @@
 
 A modern React application for exploring movies using The Movie Database (TMDB) API. Built with TypeScript, Atomic Design methodology, and mobile-first responsive architecture.
 
+## 🌐 Live Demo
+
+**🔗 [View Live Application](https://adnr-tmdb-movies.vercel.app/)**
+
+[![Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-000000?style=for-the-badge&logo=vercel)](https://adnr-tmdb-movies.vercel.app/)
+
+## 📸 Preview
+
+https://github.com/user-attachments/assets/8c23dd3a-a5ef-4645-b83c-126a32c1441a
+
+
+https://github.com/user-attachments/assets/5b0c6b55-1e17-4c30-9838-4f6d3bc86c07
+
+
 ## 🚀 Tech Stack
 
 ### Core
