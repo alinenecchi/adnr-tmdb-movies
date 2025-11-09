@@ -12,6 +12,7 @@ import { Pagination } from "@/components/molecules/Pagination/Pagination";
 import { Icon } from "@/components/atoms/Icon/Icon";
 import { useFavorites } from "@/contexts/FavoritesContext";
 import { useFavoritedMovies } from "@/hooks/useFavoritedMovies";
+import { useIsMobile } from "@/hooks/useMediaQuery";
 import { getMovieUrl } from "@/utils/slugify";
 import { PAGINATION } from "@/utils/constants";
 import type { Movie } from "@/@types";
@@ -23,6 +24,11 @@ export const Favorites = () => {
   const { movies, loading, error } = useFavoritedMovies(favorites);
   const [sortBy, setSortBy] = useState<SortOption>("title-asc");
   const [currentPage, setCurrentPage] = useState(1);
+  const isMobile = useIsMobile();
+
+  const itemsPerPage = isMobile
+    ? PAGINATION.ITEMS_PER_PAGE_MOBILE
+    : PAGINATION.ITEMS_PER_PAGE;
 
   const sortedMovies = useMemo(() => {
     const sorted = [...movies];
@@ -41,7 +47,7 @@ export const Favorites = () => {
     }
   }, [movies, sortBy]);
 
-  const totalPages = Math.ceil(sortedMovies.length / PAGINATION.ITEMS_PER_PAGE);
+  const totalPages = Math.ceil(sortedMovies.length / itemsPerPage);
 
   // Reset to page 1 when sorting changes
   useEffect(() => {
@@ -55,11 +61,21 @@ export const Favorites = () => {
     }
   }, [currentPage, totalPages]);
 
+  // Reset to page 1 when itemsPerPage changes (mobile/desktop switch)
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [itemsPerPage]);
+
+  // Scroll to top when page changes
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [currentPage]);
+
   const paginatedMovies = useMemo(() => {
-    const startIndex = (currentPage - 1) * PAGINATION.ITEMS_PER_PAGE;
-    const endIndex = startIndex + PAGINATION.ITEMS_PER_PAGE;
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
     return sortedMovies.slice(startIndex, endIndex);
-  }, [sortedMovies, currentPage]);
+  }, [sortedMovies, currentPage, itemsPerPage]);
 
   const handleMovieClick = (movie: Movie) => {
     navigate(getMovieUrl(movie.id, movie.title));
@@ -129,7 +145,7 @@ export const Favorites = () => {
               currentPage={currentPage}
               totalPages={totalPages}
               onPageChange={setCurrentPage}
-              itemsPerPage={PAGINATION.ITEMS_PER_PAGE}
+              itemsPerPage={itemsPerPage}
               totalItems={sortedMovies.length}
             />
           )}

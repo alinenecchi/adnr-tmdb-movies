@@ -35,6 +35,7 @@ export const ROUTES = {
 // Pagination
 export const PAGINATION = {
   ITEMS_PER_PAGE: 20,
+  ITEMS_PER_PAGE_MOBILE: 4,
   INITIAL_PAGE: 1,
 } as const;
 
