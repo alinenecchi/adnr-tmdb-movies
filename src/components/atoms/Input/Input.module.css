@@ -11,6 +11,15 @@
   border-radius: var(--radius-md);
   outline: none;
   transition: all 0.2s ease;
+  box-sizing: border-box;
+  /* Prevent zoom on iOS when focusing input */
+  -webkit-appearance: none;
+}
+
+@media (max-width: 599px) {
+  .input {
+    font-size: 16px; /* Prevent zoom on iOS */
+  }
 }
 
 .input::placeholder {
@@ -34,4 +43,3 @@
 .input.error:focus {
   border-color: var(--color-danger);
 }
-

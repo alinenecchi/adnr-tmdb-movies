@@ -25,6 +25,9 @@ body {
   background-color: var(--color-background);
   min-height: 100vh;
   text-rendering: optimizeLegibility;
+  /* Prevent dragging content on mobile */
+  touch-action: pan-y pinch-zoom;
+  -webkit-overflow-scrolling: touch;
 }
 
 /* Remove default list styles */
@@ -134,4 +137,3 @@ p {
   background-color: var(--color-primary);
   color: var(--color-white);
 }
-

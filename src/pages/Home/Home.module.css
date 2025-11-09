@@ -9,6 +9,15 @@
 .main {
   flex: 1;
   padding: var(--spacing-xl) var(--grid-padding);
+  width: 100%;
+}
+
+@media (max-width: 599px) {
+  .main {
+    padding: var(--spacing-lg) var(--spacing-md);
+    width: 100%;
+    max-width: 100vw;
+  }
 }
 
 @media (min-width: 1080px) {
@@ -21,12 +30,28 @@
 .content {
   max-width: var(--grid-width-desktop);
   margin: 0 auto;
+  width: 100%;
+}
+
+@media (max-width: 599px) {
+  .content {
+    max-width: 100%;
+    width: 100%;
+  }
 }
 
 .title {
   font-size: var(--text-size-3xl);
   color: var(--color-text);
   margin-bottom: var(--spacing-2xl);
+}
+
+@media (max-width: 599px) {
+  .title {
+    font-size: var(--text-size-xl);
+    line-height: var(--text-line-height-tight);
+    margin-bottom: var(--spacing-lg);
+  }
 }
 
 .error {

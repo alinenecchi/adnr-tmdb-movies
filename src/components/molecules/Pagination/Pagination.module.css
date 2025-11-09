@@ -20,6 +20,8 @@
   gap: var(--spacing-lg);
   flex-wrap: wrap;
   justify-content: center;
+  width: 100%;
+  position: relative;
 }
 
 .pageInfo {
@@ -27,15 +29,41 @@
   color: var(--color-text);
   font-weight: var(--text-weight-medium);
   padding: 0 var(--spacing-md);
+  white-space: nowrap; /* Prevent text wrapping */
+  order: 2; /* Put in the middle between buttons */
 }
 
 @media (max-width: 599px) {
   .controls {
-    gap: var(--spacing-md);
+    gap: var(--spacing-sm);
+    flex-wrap: nowrap; /* Keep buttons in one line */
+    width: 100%;
+    justify-content: space-between;
+    padding: 0 var(--spacing-xs);
   }
 
   .pageInfo {
+    font-size: var(--text-size-xs);
+    padding: 0 var(--spacing-xs);
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    order: 0; /* Reset order for absolute positioning */
+  }
+
+  /* Make buttons smaller but still touchable */
+  .controls button {
+    min-width: 44px; /* Minimum touch target */
+    padding: var(--spacing-xs) var(--spacing-sm);
     font-size: var(--text-size-sm);
-    padding: 0 var(--spacing-sm);
+  }
+
+  /* Ensure buttons are on the sides */
+  .controls button:first-child {
+    order: 1;
+  }
+
+  .controls button:last-child {
+    order: 3;
   }
 }

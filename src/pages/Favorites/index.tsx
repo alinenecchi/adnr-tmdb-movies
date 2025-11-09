@@ -138,6 +138,7 @@ export const Favorites = () => {
             isFavorite={isFavorite}
             onToggleFavorite={toggleFavorite}
             onMovieClick={handleMovieClick}
+            showTrashIcon={true}
           />
 
           {totalPages > 1 && (

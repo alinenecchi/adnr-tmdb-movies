@@ -4,16 +4,32 @@
   display: flex;
   align-items: center;
   gap: var(--spacing-md);
+  flex-wrap: nowrap;
+  min-width: 0; /* Allow shrinking */
 }
 
 .label {
   font-size: var(--text-size-base);
   color: var(--color-text-secondary);
   font-weight: var(--text-weight-medium);
+  white-space: nowrap;
+  flex-shrink: 0; /* Prevent label from shrinking */
+}
+
+@media (max-width: 599px) {
+  .container {
+    gap: var(--spacing-sm);
+  }
+
+  .label {
+    font-size: var(--text-size-sm);
+  }
 }
 
 .select {
-  padding: var(--spacing-sm) var(--spacing-lg);
+  padding: var(--spacing-sm) var(--spacing-xl) var(--spacing-sm)
+    var(--spacing-lg);
+  padding-right: var(--spacing-4xl); /* More space for arrow */
   font-size: var(--text-size-base);
   font-family: var(--font-primary);
   color: var(--color-text);
@@ -22,6 +38,24 @@
   border-radius: var(--radius-md);
   cursor: pointer;
   transition: all 0.2s ease;
+  appearance: none; /* Remove default arrow */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23ffffff' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right var(--spacing-md) center;
+  background-size: 12px;
+  min-width: 0; /* Allow shrinking */
+  flex: 1 1 auto; /* Allow growing but can shrink */
+  max-width: 100%;
+}
+
+@media (max-width: 599px) {
+  .select {
+    padding: var(--spacing-xs) var(--spacing-4xl) var(--spacing-xs)
+      var(--spacing-md);
+    font-size: var(--text-size-sm);
+    flex: 1 1 0; /* Take available space */
+    min-width: 120px; /* Minimum width to show content */
+  }
 }
 
 .select:hover {

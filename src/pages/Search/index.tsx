@@ -8,6 +8,7 @@ import { Icon } from "@/components/atoms/Icon/Icon";
 import { useSearchMovies } from "@/hooks/useSearchMovies";
 import { useFavorites } from "@/contexts/FavoritesContext";
 import { getMovieUrl } from "@/utils/slugify";
+import { highlightText } from "@/utils/highlightText";
 import type { Movie } from "@/@types";
 import styles from "./Search.module.css";
 
@@ -54,7 +55,7 @@ export const Search = () => {
         <div className={styles.content}>
           <div className={styles.header}>
             <h1 className={styles.title}>
-              Resultados para: &quot;{query}&quot;
+              Resultados para: &quot;{highlightText(query, query)}&quot;
             </h1>
             {totalResults > 0 && (
               <p className={styles.count}>

@@ -5,6 +5,8 @@
   width: 100%;
   min-height: 100vh;
   isolation: isolate;
+  /* Prevent dragging content on mobile */
+  touch-action: pan-y pinch-zoom;
 }
 
 /* Utility classes */
@@ -158,4 +160,3 @@ body[data-menu-open="true"] {
 .skip-to-content:focus {
   top: var(--spacing-sm);
 }
-

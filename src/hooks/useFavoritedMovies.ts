@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
 import { getMovieDetails } from "@/services/api/endpoints";
-import type { Movie } from "@/@types";
+import type { Movie, MovieDetails } from "@/@types";
 
 export const useFavoritedMovies = (favoriteIds: number[]) => {
-  const [movies, setMovies] = useState<Movie[]>([]);
+  const [movies, setMovies] = useState<
+    (Movie & { genres?: MovieDetails["genres"] })[]
+  >([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<Error | null>(null);
 
@@ -20,10 +22,11 @@ export const useFavoritedMovies = (favoriteIds: number[]) => {
         setError(null);
         const promises = favoriteIds.map((id) => getMovieDetails(id));
         const results = await Promise.all(promises);
-        // Convert MovieDetails to Movie by extracting genre_ids from genres
-        const moviesData: Movie[] = results.map((movie) => ({
+        // Convert MovieDetails to Movie by extracting genre_ids from genres, but keep genres for display
+        const moviesData = results.map((movie) => ({
           ...movie,
           genre_ids: movie.genres.map((g) => g.id),
+          genres: movie.genres, // Keep genres for display in favorites
         }));
         setMovies(moviesData);
       } catch (err) {
