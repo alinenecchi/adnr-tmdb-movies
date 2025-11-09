@@ -1,0 +1,46 @@
+/* Home Page Styles */
+
+.container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.main {
+  flex: 1;
+  padding: var(--spacing-xl) var(--grid-padding);
+}
+
+@media (min-width: 1080px) {
+  .main {
+    padding-left: var(--grid-padding-desktop);
+    padding-right: var(--grid-padding-desktop);
+  }
+}
+
+.content {
+  max-width: var(--grid-width-desktop);
+  margin: 0 auto;
+}
+
+.title {
+  font-size: var(--text-size-3xl);
+  color: var(--color-text);
+  margin-bottom: var(--spacing-2xl);
+}
+
+.error {
+  text-align: center;
+  padding: var(--spacing-5xl);
+}
+
+.error h2 {
+  font-size: var(--text-size-2xl);
+  color: var(--color-danger);
+  margin-bottom: var(--spacing-md);
+}
+
+.error p {
+  font-size: var(--text-size-md);
+  color: var(--color-text-secondary);
+}

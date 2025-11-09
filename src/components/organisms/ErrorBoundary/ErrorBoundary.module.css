@@ -1,0 +1,28 @@
+/* ErrorBoundary Component Styles */
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  padding: var(--spacing-xl);
+}
+
+.content {
+  text-align: center;
+  max-width: 50rem;
+}
+
+.title {
+  font-size: var(--text-size-3xl);
+  color: var(--color-danger);
+  margin-bottom: var(--spacing-md);
+}
+
+.message {
+  font-size: var(--text-size-md);
+  color: var(--color-text-secondary);
+  margin-bottom: var(--spacing-xl);
+  line-height: var(--text-line-height-relaxed);
+}
+

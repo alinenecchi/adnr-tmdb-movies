@@ -1,0 +1,35 @@
+/* MovieGrid Component Styles */
+
+.container {
+  width: 100%;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-lg);
+  width: 100%;
+}
+
+/* Tablet: 2 columns */
+@media (min-width: 600px) {
+  .grid {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: var(--spacing-xl);
+  }
+}
+
+/* Desktop: 4-6 columns */
+@media (min-width: 1080px) {
+  .grid {
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: var(--spacing-xxl);
+  }
+}
+
+.loadMore {
+  display: flex;
+  justify-content: center;
+  padding: var(--spacing-2xl) 0;
+  min-height: 10rem;
+}

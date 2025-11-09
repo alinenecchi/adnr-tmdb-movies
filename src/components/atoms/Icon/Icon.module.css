@@ -1,0 +1,23 @@
+/* Icon Component Styles */
+
+.icon {
+  display: inline-block;
+  vertical-align: middle;
+  flex-shrink: 0;
+}
+
+.small {
+  width: 1.6rem;
+  height: 1.6rem;
+}
+
+.medium {
+  width: 2.4rem;
+  height: 2.4rem;
+}
+
+.large {
+  width: 3.2rem;
+  height: 3.2rem;
+}
+

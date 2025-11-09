@@ -1,0 +1,58 @@
+import { useNavigate } from "react-router-dom";
+import { Header } from "@/components/organisms/Header/Header";
+import { MovieGrid } from "@/components/organisms/MovieGrid/MovieGrid";
+import { Loading } from "@/components/atoms/Loading/Loading";
+import { useMovies } from "@/hooks/useMovies";
+import { useFavorites } from "@/contexts/FavoritesContext";
+import { getMovieUrl } from "@/utils/slugify";
+import type { Movie } from "@/@types";
+import styles from "./Home.module.css";
+
+export const Home = () => {
+  const navigate = useNavigate();
+  const { movies, loading, error, loadMore, hasMore } = useMovies();
+  const { isFavorite, toggleFavorite } = useFavorites();
+
+  const handleMovieClick = (movie: Movie) => {
+    navigate(getMovieUrl(movie.id, movie.title));
+  };
+
+  if (error) {
+    return (
+      <div className={styles.container}>
+        <Header />
+        <main className={styles.main}>
+          <div className={styles.error}>
+            <h2>Ops! Algo deu errado</h2>
+            <p>{error.message}</p>
+          </div>
+        </main>
+      </div>
+    );
+  }
+
+  return (
+    <div className={styles.container}>
+      <Header />
+      <main className={styles.main}>
+        <div className={styles.content}>
+          <h1 className={styles.title}>Filmes Populares</h1>
+
+          {loading && movies.length === 0 ? (
+            <Loading text="Carregando filmes..." />
+          ) : (
+            <MovieGrid
+              movies={movies}
+              loading={loading}
+              isFavorite={isFavorite}
+              onToggleFavorite={toggleFavorite}
+              onMovieClick={handleMovieClick}
+              onLoadMore={loadMore}
+              hasMore={hasMore}
+            />
+          )}
+        </div>
+      </main>
+    </div>
+  );
+};
