@@ -1,0 +1,39 @@
+/* Design Tokens - Spacing (8px base unit) */
+
+:root {
+  /* Spacing Scale */
+  --spacing-zero: 0;
+  --spacing-xs: 0.4rem; /* 4px */
+  --spacing-sm: 0.8rem; /* 8px */
+  --spacing-md: 1.6rem; /* 16px */
+  --spacing-lg: 2.4rem; /* 24px */
+  --spacing-xl: 3.2rem; /* 32px */
+  --spacing-xxl: 4rem; /* 40px */
+  --spacing-2xl: 4.8rem; /* 48px */
+  --spacing-3xl: 5.6rem; /* 56px */
+  --spacing-4xl: 6.4rem; /* 64px */
+  --spacing-5xl: 8rem; /* 80px */
+
+  /* Grid System */
+  --grid-padding: 2.4rem;
+  --grid-padding-desktop: 9.6rem;
+  --grid-gutter: 3.2rem;
+  --grid-width-desktop: 117.4rem;
+
+  /* Component Specific */
+  --header-height: 7.5rem;
+  --footer-height: 6rem;
+
+  /* Border Radius */
+  --radius-sm: 0.4rem;
+  --radius-md: 0.8rem;
+  --radius-lg: 1.2rem;
+  --radius-xl: 1.6rem;
+  --radius-full: 9999px;
+
+  /* Border Width */
+  --border-width-thin: 1px;
+  --border-width-medium: 2px;
+  --border-width-thick: 4px;
+}
+

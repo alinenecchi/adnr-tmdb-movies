@@ -1,0 +1,34 @@
+/* Design Tokens - Breakpoints (Mobile First) */
+
+:root {
+  --breakpoint-mobile: 600px;
+  --breakpoint-tablet: 1080px;
+  --breakpoint-desktop: 1920px;
+}
+
+/* Custom Media Queries for easy reuse */
+/* Note: @custom-media is not yet supported in all browsers */
+/* Use these values directly in @media queries */
+
+/*
+Usage in components:
+
+Mobile (default, < 600px):
+  Base styles here
+
+Tablet (>= 600px):
+@media (min-width: 600px) {
+  Tablet styles
+}
+
+Desktop (>= 1080px):
+@media (min-width: 1080px) {
+  Desktop styles
+}
+
+Wide Desktop (>= 1920px):
+@media (min-width: 1920px) {
+  Wide desktop styles
+}
+*/
+
