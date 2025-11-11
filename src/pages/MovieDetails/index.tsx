@@ -18,6 +18,16 @@ export const MovieDetails = () => {
   const { movie, loading, error } = useMovieDetails(movieId || 0);
   const { isFavorite, toggleFavorite } = useFavorites();
 
+  const handleBack = () => {
+    const returnUrl = sessionStorage.getItem("returnUrl");
+    if (returnUrl) {
+      sessionStorage.removeItem("returnUrl");
+      navigate(returnUrl);
+    } else {
+      navigate("/");
+    }
+  };
+
   if (loading) {
     return (
       <div className={styles.container}>
@@ -55,7 +65,7 @@ export const MovieDetails = () => {
       <main className={styles.main}>
         <Button
           variant="ghost"
-          onClick={() => navigate("/")}
+          onClick={handleBack}
           className={styles.backButton}
         >
           <Icon name="arrow-left" size="small" />

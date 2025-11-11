@@ -43,7 +43,11 @@ export const MovieCard: React.FC<MovieCardProps> = ({
   };
 
   return (
-    <article className={styles.card} onClick={() => onClick?.(movie)}>
+    <article
+      className={styles.card}
+      data-movie-id={movie.id}
+      onClick={() => onClick?.(movie)}
+    >
       <div className={styles.imageContainer}>
         <Image
           src={imageUrl}

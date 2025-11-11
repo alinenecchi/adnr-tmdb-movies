@@ -1,5 +1,5 @@
-import { useState, useMemo, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState, useMemo, useEffect, useRef } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import { Header } from "@/components/organisms/Header/Header";
 import { MovieGrid } from "@/components/organisms/MovieGrid/MovieGrid";
 import { Loading } from "@/components/atoms/Loading/Loading";
@@ -20,11 +20,13 @@ import styles from "./Favorites.module.css";
 
 export const Favorites = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const { favorites, toggleFavorite, isFavorite } = useFavorites();
   const { movies, loading, error } = useFavoritedMovies(favorites);
   const [sortBy, setSortBy] = useState<SortOption>("title-asc");
   const [currentPage, setCurrentPage] = useState(1);
   const isMobile = useIsMobile();
+  const restoringRef = useRef<number | null>(null);
 
   const itemsPerPage = isMobile
     ? PAGINATION.ITEMS_PER_PAGE_MOBILE
@@ -49,27 +51,28 @@ export const Favorites = () => {
 
   const totalPages = Math.ceil(sortedMovies.length / itemsPerPage);
 
-  // Reset to page 1 when sorting changes
   useEffect(() => {
     setCurrentPage(1);
   }, [sortBy]);
 
-  // Reset to page 1 if current page is out of bounds
   useEffect(() => {
     if (currentPage > totalPages && totalPages > 0) {
       setCurrentPage(1);
     }
   }, [currentPage, totalPages]);
 
-  // Reset to page 1 when itemsPerPage changes (mobile/desktop switch)
   useEffect(() => {
     setCurrentPage(1);
   }, [itemsPerPage]);
 
-  // Scroll to top when page changes
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  }, [currentPage]);
+    const params = new URLSearchParams(location.search);
+    const hasMovieId = params.has("movieId");
+    const isRestoring = sessionStorage.getItem("isRestoringScroll") === "true";
+    if (!hasMovieId && !isRestoring) {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  }, [currentPage, location.search]);
 
   const paginatedMovies = useMemo(() => {
     const startIndex = (currentPage - 1) * itemsPerPage;
@@ -77,7 +80,114 @@ export const Favorites = () => {
     return sortedMovies.slice(startIndex, endIndex);
   }, [sortedMovies, currentPage, itemsPerPage]);
 
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const pageParam = params.get("page");
+    if (pageParam) {
+      const page = parseInt(pageParam, 10);
+      if (page !== currentPage && page >= 1 && page <= totalPages) {
+        setCurrentPage(page);
+      }
+    }
+  }, [location.search, currentPage, totalPages]);
+
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const pageParam = params.get("page");
+    const movieId = params.get("movieId");
+
+    if (pageParam) {
+      const page = parseInt(pageParam, 10);
+      if (page !== currentPage) {
+        return;
+      }
+    }
+
+    if (!movieId) return;
+
+    const id = parseInt(movieId);
+    if (restoringRef.current === id || !paginatedMovies.length || loading)
+      return;
+
+    const exists = paginatedMovies.some((m) => m.id === id);
+    if (!exists) {
+      const newParams = new URLSearchParams();
+      if (currentPage > 1) newParams.set("page", currentPage.toString());
+      const newUrl = newParams.toString()
+        ? `/favorites?${newParams}`
+        : "/favorites";
+      navigate(newUrl, { replace: true });
+      return;
+    }
+
+    restoringRef.current = id;
+    sessionStorage.setItem("isRestoringScroll", "true");
+
+    const scrollToMovie = () => {
+      const element = document.querySelector(
+        `[data-movie-id="${id}"]`
+      ) as HTMLElement;
+      if (element) {
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+              const rect = element.getBoundingClientRect();
+              const scrollY =
+                window.scrollY +
+                rect.top -
+                window.innerHeight / 2 +
+                rect.height / 2 -
+                120;
+              window.scrollTo({
+                top: Math.max(0, scrollY),
+                behavior: "smooth",
+              });
+              setTimeout(() => {
+                const newParams = new URLSearchParams();
+                if (currentPage > 1)
+                  newParams.set("page", currentPage.toString());
+                const newUrl = newParams.toString()
+                  ? `/favorites?${newParams}`
+                  : "/favorites";
+                navigate(newUrl, { replace: true });
+                setTimeout(() => {
+                  restoringRef.current = null;
+                  sessionStorage.removeItem("isRestoringScroll");
+                }, 1500);
+              }, 1000);
+            });
+          });
+        });
+        return true;
+      }
+      return false;
+    };
+
+    const tryScroll = (attempts = 0) => {
+      if (scrollToMovie()) return;
+      if (attempts < 100) {
+        setTimeout(() => tryScroll(attempts + 1), 150);
+      } else {
+        const newParams = new URLSearchParams();
+        if (currentPage > 1) newParams.set("page", currentPage.toString());
+        const newUrl = newParams.toString()
+          ? `/favorites?${newParams}`
+          : "/favorites";
+        navigate(newUrl, { replace: true });
+        restoringRef.current = null;
+        sessionStorage.removeItem("isRestoringScroll");
+      }
+    };
+
+    setTimeout(() => tryScroll(), 800);
+  }, [location.search, paginatedMovies, loading, navigate, currentPage]);
+
   const handleMovieClick = (movie: Movie) => {
+    const returnUrl =
+      currentPage > 1
+        ? `/favorites?page=${currentPage}&movieId=${movie.id}`
+        : `/favorites?movieId=${movie.id}`;
+    sessionStorage.setItem("returnUrl", returnUrl);
     navigate(getMovieUrl(movie.id, movie.title));
   };
 
